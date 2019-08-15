@@ -1,0 +1,117 @@
+@font-face {
+	font-family: "quick";
+	src: url('../fonts/quick.otf');
+}
+
+@font-face {
+	font-family: 'nucleo';
+	src: url('../fonts/nucleo.woff');
+}
+
+@font-face {
+	font-family: 'exo';
+	src: url('../fonts/balo.ttf');
+}
+
+
+
+@media screen and (max-width: 400px) {
+	.back {
+		height: 280px;
+		background: salmon;
+		width: 280px;
+		border-radius: 50%;
+		transform: rotate(120deg);
+		margin-top: -30%;
+		float: right;
+		margin-right: -20%;
+		margin-bottom: -35%;
+	}
+
+	#foto-pro {
+		margin-top: -25%;
+	}
+
+	#judul-berkas {
+		margin-top: 10%;
+		font-family: "exo";
+		text-transform: uppercase;
+		margin-left: 8%;
+	}
+}
+
+@media screen and(max-width: 2100px) {
+	#judul-berkas {
+		margin-top: 10%;
+		font-family: "exo";
+		text-transform: uppercase;
+		margin-left: 8%;
+	}
+}
+
+
+
+.clear-right {
+	clear: right;
+}
+
+
+
+
+#kotak {
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+	outline: none;
+}
+
+.back-rekomendasi {
+	width: 110%;
+	height: 200px;
+	margin-left: -5%;
+	background-color: orange;
+}
+
+.btn-down {
+	padding: 10px 20px 5px 20px;
+	background-color: #ffffff;
+	color: #f56e61;
+	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+	border-radius: 10px;
+	font-size: 27px;
+
+}
+
+.card-berkas {
+	background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+	height: 70px;
+	width: 90%;
+	border-radius: 10px;
+	margin: 5%;
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+
+}
+
+#menu-bawah {
+	height: 70px;
+	background-color: #f7fafc;
+}
+
+
+
+#icon-home {
+	font-size: 30px;
+	text-align: center;
+	color: #f56f61;
+}
+
+.not {
+	font-size: 15px;
+	color: white;
+	padding: 5px 10px;
+	border: none;
+	margin-left: -30%;
+	margin-bottom: 20%;
+	border-radius: 10px;
+	background-color: #ff384bde;
+}

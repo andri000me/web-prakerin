@@ -1,0 +1,120 @@
+.kotak-satu {
+    width: 150px;
+    height: 150px;
+    background-image: radial-gradient(circle 484px at 49.4% 19%, rgba(23, 156, 214, 1) 0%, rgba(52, 48, 111, 1) 100.2%);
+    border-radius: 10px;
+    transform: rotate(120deg);
+    float: right;
+    margin-top: -18%;
+    margin-right: -5%;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.kotak-satu .bunder-dua {
+    width: 150px;
+    height: 150px;
+    margin-top: -80%;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.kotak-dua {
+    width: 110px;
+    height: 85px;
+    background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+    border-radius: 10px;
+    float: right;
+    margin-right: -22%;
+    margin-top: 5%;
+    transform: rotate(120deg);
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.kotak-dua .bunder {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    background-color: white;
+    margin-left: -50%;
+}
+
+.judul-absensi {
+    margin-left: 12%;
+    margin-top: 8%;
+    margin-bottom: 5%;
+    text-transform: uppercase;
+    border-bottom: 2px solid #f56e61;
+    width: 40%;
+    color: #f56e61;
+    margin-bottom: 30%;
+    font-family: "exo";
+}
+
+.bunder-samping {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background-image: radial-gradient(circle 484px at 49.4% 19%, rgba(23, 156, 214, 1) 0%, rgba(52, 48, 111, 1) 100.2%);
+    margin-left: -30%;
+    margin-top: -85%;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+}
+
+.kotak-kepo {
+    width: 350px;
+    height: 150px;
+    border-radius: 15px;
+    background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+    float: right;
+    margin-right: -10%;
+    margin-top: 10%;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+}
+
+.judul-p {
+    color: #fff;
+    margin-left: 5%;
+    margin-top: 5%;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 2px solid #fff;
+    width: 40%;
+    font-family: "exo";
+}
+
+.isi-p {
+    color: #fff;
+    margin-left: 5%;
+    width: 80%;
+    font-family: "exo";
+}
+
+#btn-sudah {
+    background-color: #f56e61;
+    border-color: none;
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+}
+
+#klik {
+    background-color: #f56e61;
+    border-color: none;
+    color: white;
+    font-size: 16px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+#absen-sa {
+    background-color: #f56e61;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
