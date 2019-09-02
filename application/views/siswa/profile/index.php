@@ -10,95 +10,160 @@ if ($this->session->flashdata('tamdesk') ==  TRUE) : ?>
 </script>
 <?php endif;
 
-echo $session = $this->session->userdata('user');
+$session = $this->session->userdata('user');
 $select = $this->db->query("SELECT * FROM tb_siswa INNER JOIN tb_jurusan ON tb_siswa.jurusan = tb_jurusan.nama_singkat WHERE user = '$session' ");
 $fetch = $select->row();
 foreach ($siswa as $o) :
 
 	?>
-<div style="overflow-x:hidden">
-	<h1 class="text-center" id="judul-pro"><?= substr($o->nama_siswa, 0, 10) ?></h1>
-	<p class="text-jurusan"><i class="ni ni-hat-3"></i> <?= $fetch->nama_panjang; ?></p>
+<section class="tengah">
+	<div class="kanan-bag">
+		<div class="bungkus-kanan">
+			<div id="foto-profile">
+				<img src="<?= base_url('assets/uploads/profile-siswa/') . $o->foto; ?>" alt="Foto Profile" class="img-thumbnail rounded-circle">
+			</div>
 
-	<div style="overflow-y: hidden;">
-		<div class="" id="back-bawah">
+			<div class="judul-nama">
+				<h1 class="judul-siswa"><?= $o->nama_siswa ?></h1>
+			</div>
 
-			<div class="justify-content-center" id="foto">
-				<img src="<?= base_url('assets/uploads/profile-siswa/') . $o->foto ?>" alt="Foto Profile" id="profile">
-				<p class="text-center" id="tag-pro"> <?= $o->kelas; ?> |
-					<?php
-						$ouy = $fetch->jk;
-						if ($ouy = "L") {
-							?>
-					LAKI-LAKI
+			<div class="diskripsi-saya">
+				<?php
+					if ($o->diskripsi == "") {
+						?>
+				<p class="diskripsi-oy">Diskripsi tentang diri anda masih kosong, ini adalah bagian untuk menambahkan diskripsi tentang diri anda. Anda dapat menambahkannya dengan mengklik tombol diskripsi di bagian bawah ini.</p>
 
-					<?php } else { ?>
-					PEREMPUAN
-					<?php } ?>
-					|
+				<?php } else { ?>
+				<p class="diskripsi-oy"><?= $o->diskripsi ?></p>
+				<?php } ?>
+			</div>
 
-					<?= $fetch->nama_singkat ?> </p>
-				<div class="row">
-					<div class="col-3"></div>
-					<div class="col-7 justify-content-center">
-						<?php
-							if ($fetch->diskripsi != "") {
-								?>
-						<a href="" class="btn btn-icon btn-3 btn-primary" id="but" data-toggle="modal" data-target="#modal-notification2">
-							<span class="btn-inner--icon"><i class="ni ni-badge"></i></span>
-							<span class="btn-inner--text" style="font-family: 'exo' ">DISKRIPSI</span>
-						</a>
-						<?php } else { ?>
-						<a href="" class="btn btn-icon btn-3 btn-primary" id="but" data-toggle="modal" data-target="#exampleModal">
-							<span class="btn-inner--icon"><i class="ni ni-badge"></i></span>
-							<span class="btn-inner--text" style="font-family: 'exo' ">DISKRIPSI</span>
-						</a>
-						<?php } ?>
-						<?php
-							if ($fetch->diskripsi != "") {
-								?>
-						<a href="" class="btn btn-icon btn-3 btn-primary" id="but" data-toggle="modal" data-target="#exampleModal2">
-							<span class="btn-inner--icon"><i class="ni ni-settings-gear-65"></i></span>
-							<span class="btn-inner--text" style="font-family: 'exo'">SETTING</span>
-						</a>
-						<?php
-							} else { ?>
-						<a href="" class="btn btn-icon btn-3 btn-primary" id="but" data-toggle="modal" data-target="#modal-notification3">
-							<span class="btn-inner--icon"><i class="ni ni-settings-gear-65"></i></span>
-							<span class="btn-inner--text" style="font-family: 'exo'">SETTING</span>
-						</a>
-						<?php }
-							?>
-					</div>
+			<div class="tombol-aksi">
+				<?php
+
+					if ($o->diskripsi != "") { ?>
+
+				<div class="aksi-kanan">
+					<a href="" id="btn-aksi" class="mr--5" data-toggle="modal" data-target="#gagal-dis"><i class="ni ni-badge"></i> Diskripsi</a>
 				</div>
 
+				<?php } else { ?>
+				<div class="aksi-kanan">
+					<a href="" id="btn-aksi" class="mr--5" data-toggle="modal" data-target="#notif-dis-satu"><i class="ni ni-badge"></i> Diskripsi</a>
+				</div>
+				<?php } ?>
+				<?php
 
-				<p class="diskripsi-saya mt-3"><?= substr($o->diskripsi, 0, 150) ?></p>
-
+					if ($o->diskripsi == "") { ?>
+				<div class="aksi-kiri">
+					<a href="" id="btn-aksi" data-toggle="modal" data-target="#gagal" class="pl-5 ml--2 pr-5"><i class="ni ni-settings"></i> Ganti</a>
+				</div>
+				<?php } else { ?>
+				<div class="aksi-kiri">
+					<a href="" id="btn-aksi" class="pl-5 ml--2 pr-5" data-toggle="modal" data-target="#notif-dis-dua"><i class="ni ni-settings"></i> Ganti</a>
+				</div>
+				<?php } ?>
 
 			</div>
 		</div>
+		<div class="clear-left"></div>
+	</div>
+	<div class="kiri-bag">
+		<h1 class="judul-detail">Detail Profile</h1>
+		<div class="colo-satu">
+			<i class="ni ni-circle-08" id="icon-pro"></i>
+		</div>
+		<div class="colo-dua">
+			<span class="nama-sis mt--3"><?= $o->nama_siswa; ?></span>
+		</div>
+
+		<div class="colo-satu">
+			<i class="ni ni-shop" id="icon-pro"></i>
+		</div>
+		<div class="colo-dua">
+			<span class="nama-sis mt--3"><?= $o->kelas; ?></span>
+		</div>
+
+		<div class="colo-satu">
+			<i class="ni ni-hat-3" id="icon-pro"></i>
+		</div>
+		<div class="colo-dua">
+			<span class="nama-sis mt--3"><?= $o->jurusan; ?> ( <?= $fetch->nama_panjang ?> )</span>
+		</div>
+
+		<div class="colo-satu">
+			<i class="ni ni-satisfied" id="icon-pro"></i>
+		</div>
+		<div class="colo-dua">
+			<span class="nama-sis mt--3">
+				<?php
+					if ($o->jk = "L") {
+						echo "LAKI LAKI";
+					} else {
+						echo "PEREMPUAN";
+					}
+					?>
+			</span>
+		</div>
+
+	</div>
+
+	<div class="claer-left"></div>
+</section>
+
+<?php endforeach; ?>
+
+
+
+
+<!-- SECTION NOTIF -->
+
+
+<div class="col-md-4">
+	<div class=" modal fade" id="notif-dis-dua" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+		<form method="POST" action="<?= base_url('siswa/desk') ?>">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Ubah Diskripsi</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+
+						<input type="hidden" value="<?= $fetch->id_siswa; ?>" name="id">
+						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="diskripsi"><?= $o->diskripsi ?></textarea>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+						<button type="submit" class="btn btn-primary">Ubah</button>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 </div>
 
-<!-- Modal -->
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<form method="POST" action="<?= base_url('siswa/desk') ?>">
+<div class="modal fade" id="notif-dis-satu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<form action="<?= base_url('siswa/desk') ?>" method="POST">
+		<input type="hidden" name="id" value="<?= $o->id_siswa ?>">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Masukan Diskripsi</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Masukan diskripsi</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<input type="hidden" value="<?= $fetch->id_siswa; ?>" name="id">
-					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Masukan diskripsi tentang diri anda disini" name="diskripsi"></textarea>
+
+					<textarea class="form-control form-control-alternative" rows="3" placeholder="Masukan diskripsi anda di sini..." name="diskripsi"></textarea>
+
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
 					<button type="submit" class="btn btn-primary">Simpan</button>
 				</div>
 			</div>
@@ -106,91 +171,68 @@ foreach ($siswa as $o) :
 	</form>
 </div>
 
-<!-- Modal Notifikasi -->
-<div class="modal fade" id="modal-notification2" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-	<div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-		<div class="modal-content bg-gradient-danger">
+<div class="col-md-4">
+	<div class="modal fade" id="gagal" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+		<div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+			<div class="modal-content bg-gradient-danger">
 
-			<div class="modal-header">
-				<h6 class="modal-title" id="modal-title-notification">Pemberitahuan</h6>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
-			</div>
-
-			<div class="modal-body">
-
-				<div class="py-3 text-center">
-					<i class="ni ni-bell-55 ni-3x"></i>
-					<h4 class="heading mt-4"></h4>
-					<p>Kamu tidak dapat menambah diskripsi lagi, jika ingin merubahnya silahkan klik tombol setting</p>
-				</div>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Oke, saya paham</button>
-			</div>
-
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" id="modal-notification3" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-	<div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-		<div class="modal-content bg-gradient-danger">
-
-			<div class="modal-header">
-				<h6 class="modal-title" id="modal-title-notification">Pemberitahuan</h6>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
-			</div>
-
-			<div class="modal-body">
-
-				<div class="py-3 text-center">
-					<i class="ni ni-bell-55 ni-3x"></i>
-					<h4 class="heading mt-4">Tidak dapat mengakses menu setting!</h4>
-					<p>Kamu belum memesukan diskripsi tentang kamu, silahkan masukan diskripsi tentang kamu terlebih dahulu</p>
-				</div>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Oke, saya paham</button>
-			</div>
-
-		</div>
-	</div>
-</div>
-
-<!-- MODAL SETTING -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<form method="POST" action="<?= base_url('siswa/desk') ?>">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ubah Diskripsi</h5>
+					<h6 class="modal-title" id="modal-title-notification">PEMBERITAHUAN</h6>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+						<span aria-hidden="true">×</span>
 					</button>
 				</div>
+
 				<div class="modal-body">
 
-					<input type="hidden" value="<?= $fetch->id_siswa; ?>" name="id">
-					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="diskripsi"><?= $o->diskripsi ?></textarea>
+					<div class="py-3 text-center">
+						<i class="ni ni-bell-55 ni-3x"></i>
+						<h4 class="heading mt-4">Menu Tidak Dapat di akses</h4>
+						<p>Maaf kamu belum memasukan diskripsi tentang kamu</p>
+					</div>
 
 				</div>
+
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-					<button type="submit" class="btn btn-primary">Ubah</button>
+
+					<button type="button" class="btn btn-white" data-dismiss="modal">oke</button>
 				</div>
+
 			</div>
 		</div>
-	</form>
+	</div>
 </div>
 
-<?php endforeach; ?>
+<div class="col-md-4">
+	<div class="modal fade" id="gagal-dis" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+		<div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+			<div class="modal-content bg-gradient-danger">
+
+				<div class="modal-header">
+					<h6 class="modal-title" id="modal-title-notification">PEMBERITAHUAN</h6>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+
+					<div class="py-3 text-center">
+						<i class="ni ni-bell-55 ni-3x"></i>
+						<h4 class="heading mt-4">Menu Tidak Dapat di akses</h4>
+						<p>Maaf kamu sudah menambahkan diskripsi!</p>
+					</div>
+
+				</div>
+
+				<div class="modal-footer">
+
+					<button type="button" class="btn btn-white" data-dismiss="modal">oke</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- END SECTION NOTIF -->

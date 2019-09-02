@@ -48,7 +48,7 @@ class Siswa extends CI_Controller
 
 		$data['berkas']  = $this->m_siswa->pagination('tb_berkas', $config['per_page'], $offset);
 		$this->load->view('siswa/header');
-		$this->load->view('siswa/content', $data);
+		$this->load->view('siswa/home', $data);
 		$this->load->view('siswa/footer');
 	}
 
