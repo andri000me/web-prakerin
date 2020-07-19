@@ -912,6 +912,21 @@ class Admin extends CI_Controller
 		$this->load->view('admin/absensi/index', $data);
 	}
 
+	public function cetakAbsenKelas()
+	{
+		$this->load->library('pdf');
+
+		$siswa			 = $this->input->post('siswa');
+		$key 			   = $this->input->post('keyword');
+
+		$data['akhir']	 = $this->m_admin->akhir($siswa, $key);
+		$data['coba']	 = $_GET['jurusan'];
+
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->filename = "laporan-petanikode.pdf";
+		$this->pdf->load_view('laporan_pdf', $data);
+	}
+
 	public function cariAbsen()
 	{
 		$key 			    = $this->input->post('keyword');
@@ -1248,6 +1263,7 @@ class Admin extends CI_Controller
 		$data['nilai'] 				= $this->m_admin->nilai($key);
 		$perPage					= $config['per_page'];
 		$data['terpilih']			= $this->db->query("SELECT * FROM tb_nilai INNER JOIN tb_siswa ON tb_nilai.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_siswa ON tb_nilai.id_siswa = tb_tempat_siswa.id_siswa LIMIT $offset, $perPage ")->result();
+		$data['jmlTerpilih'] = $this->db->query("SELECT * FROM tb_nilai INNER JOIN tb_siswa ON tb_nilai.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_siswa ON tb_nilai.id_siswa = tb_tempat_siswa.id_siswa")->row();
 		$this->pagination->initialize($config);
 		$data['halaman'] 			= $this->pagination->create_links();
 		$data['offset']  			= $offset;
@@ -1293,12 +1309,31 @@ class Admin extends CI_Controller
 		redirect('admin/nilaiSiswa');
 	}
 
-	public function editNilai($nis)
+	public function editNilai($id)
 	{
-		$data['edit']		= $this->db->query("SELECT * FROM tb_nilai INNER JOIN tb_siswa ON tb_nilai.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_siswa ON tb_nilai.id_siswa = tb_tempat_siswa.id_siswa WHERE nis = '$nis' ")->result();
-		$this->load->view('admin/index');
-		$this->load->view('admin/sidebar');
-		$this->load->view('admin/nilai/edit', $data);
+		$data['siswa'] = $this->m_admin->getSiswaById($id);
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+		$data['join'] = $this->m_admin->showJoinDataSiswa($id)->result();
+
+
+		$this->form_validation->set_rules('kera', 'Kera', 'required');
+		$this->form_validation->set_rules('prestasi', 'Prestasi', 'required');
+		$this->form_validation->set_rules('disiplin', 'Disiplin', 'required');
+		$this->form_validation->set_rules('kerjasama', 'Kerjasama', 'required');
+		$this->form_validation->set_rules('inisiatif', 'Inisiatif', 'required');
+		$this->form_validation->set_rules('tanggung', 'Tanggung Jawab', 'required');
+		$this->form_validation->set_rules('ujian', 'Ujian', 'required');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('admin/index');
+			$this->load->view('admin/sidebar');
+			$this->load->view('admin/nilai/edit', $data);
+		} else {
+			$this->m_admin->ubahDataNilaiSiswa();
+			$this->session->set_flashdata('flash', 'Ditambahkan');
+			redirect('admin/nilaiSiswa');
+		}
 	}
 
 	public function ubahNilai()
@@ -1327,5 +1362,22 @@ class Admin extends CI_Controller
 		$this->m_admin->updateNilai($dimana, $data);
 		$this->session->set_flashdata('ubah_nilai', 'Nilai Berhasil di Ubah!');
 		redirect('admin/nilaiSiswa');
+	}
+
+	public function laporan_pdf()
+	{
+
+		$data = array(
+			"dataku" => array(
+				"nama" => "Petani Kode",
+				"url" => "http://petanikode.com"
+			)
+		);
+
+		$this->load->library('pdf');
+
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->filename = "laporan-petanikode.pdf";
+		$this->pdf->load_view('laporan_pdf', $data);
 	}
 }

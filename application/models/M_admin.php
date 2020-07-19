@@ -277,4 +277,39 @@ class m_admin extends CI_Model
 	{
 		$this->db->insert($table, $data);
 	}
+	public function ubahDataNilaiSiswa()
+	{
+		$data = [
+			"kerajinan" => $this->input->post('kera'),
+			"prestasi" => $this->input->post('prestasi'),
+			"disiplin" => $this->input->post('disiplin'),
+			"kerjasama" => $this->input->post('kerjasama'),
+			"inisiatif" => $this->input->post('inisiatif'),
+			"tanggung_jawab" => $this->input->post('tanggung'),
+			"ujian_prakerin" => $this->input->post('ujian')
+
+		];
+		$this->db->where('id_nilai', $this->input->post('id'));
+		$this->db->update('tb_nilai', $data);
+	}
+	public function getSiswaById($id)
+	{
+		return $this->db->get_where('tb_nilai', ['id_nilai' => $id])->result();
+	}
+
+	public function showJoinDataSiswa($id)
+	{
+
+		$this->db->select('*');
+		$this->db->from('tb_nilai');
+		$this->db->join('tb_siswa', 'tb_nilai.id_siswa = tb_siswa.id_siswa');
+		$this->db->join('tb_tempat_siswa', 'tb_nilai.id_siswa = tb_tempat_siswa.id_siswa');
+		$this->db->where('id_nilai', $id);
+		return $this->db->get();
+	}
+
+	public function getNilaiSiswaById($id)
+	{
+		return $this->db->get_where('tb_nilai', ['id_nilai' => $id])->result();
+	}
 }
