@@ -312,4 +312,8 @@ class m_admin extends CI_Model
 	{
 		return $this->db->get_where('tb_nilai', ['id_nilai' => $id])->result();
 	}
+	public function showCetakNilai()
+	{
+		return $this->db->get('tb_absensi')->result();
+	}
 }
