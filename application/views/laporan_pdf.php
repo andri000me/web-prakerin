@@ -6,37 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        img {
-            width: 70px;
-
+        table {
+            border-spacing: 25px;
         }
     </style>
 </head>
 
 <body>
-    <table style="text-align: center;">
+    <table>
         <tr>
             <th>No.</th>
-            <th>Tanggal</th>
-            <th>Jam</th>
-            <th>Foto Absen</th>
             <th>Nama Siswa</th>
+            <th>Tanggal</th>
+            <th style="margin-left: 10px;">Jam</th>
             <th>Nama Perusahaan</th>
         </tr>
 
         <?php $no = 1;
         foreach ($cetak as $a) : ?>
 
-            <tr>
-                <td><?= $no++ ?></td>
-                <td><?= $a->tanggal; ?></td>
-                <td><?= $a->jam; ?></td>
-                <td><img src="<?= $a->foto; ?>"></td>
+            <tr">
+                <td style="text-align: center;"><?= $no++ ?></td>
                 <td><?= $a->siswa; ?></td>
+                <td><?= $a->tanggal; ?></td>
+                <td style="text-align: center;"><?= $a->jam; ?></td>
                 <td><?= $a->perusahaan; ?></td>
 
-            </tr>
-        <?php endforeach; ?>
+                </tr>
+            <?php endforeach; ?>
     </table>
 
 </body>
